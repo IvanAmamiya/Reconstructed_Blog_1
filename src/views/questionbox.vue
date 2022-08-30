@@ -1,0 +1,17 @@
+<template>
+    <div class="questionbox">
+        <RouterView />
+
+      <h1>test</h1>
+    </div>
+  </template>
+  
+  <style>
+  @media (min-width: 1024px) {
+    .questionbox {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+  }
+  </style>
