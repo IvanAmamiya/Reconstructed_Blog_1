@@ -7,9 +7,10 @@
 <template>
     
 
-    <div class="app">
+    <el class="app">
       <RouterView/> 
-   </div>
+   </el>
 
 </template>
+
 
