@@ -7,15 +7,20 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: import('../Home.vue'),
+      children:[
+        {
+          path: '/login',
+          //name = "login" 加上name立马无法显示是为什么
+          component: Login,
+    
+          
+        },
+
+      ]
 
       
     },
-    {
-      path: '/login',
-      component: Login,
 
-      
-    },
    
 
   ]
