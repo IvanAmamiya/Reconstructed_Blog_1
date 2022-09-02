@@ -14,10 +14,10 @@
     @select="handleSelect"    
   >
     <h3>Rokossovskaya的个人Blog</h3>
-    <el-menu-item index="2"  @click = "ClickMenu('')" >首页</el-menu-item>
+    <el-menu-item index="2"  @click = "ClickMenu('home')" >首页</el-menu-item>
     <el-menu-item index="2" >文章</el-menu-item>
     <el-menu-item index="3">提问箱</el-menu-item>
-    <el-menu-item index="4" >关于</el-menu-item>
+    <el-menu-item index="4" @click = "ClickMenu('about')">关于</el-menu-item>
     <div class="flex-grow" />
     <el-menu-item index="5" @click = "ClickMenu('login')" >登录</el-menu-item>
 
@@ -41,7 +41,9 @@ h3{
 }
 html,body{
   margin:0;
+  
 }
+
 </style>
 
 <script>
@@ -53,7 +55,7 @@ html,body{
       {
         this.$router.push(
           {
-            path:'/'+item
+            name:item
           }
         )
       }
