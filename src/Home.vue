@@ -1,7 +1,7 @@
 <template>
 <RouterView/> 
 
-<div class="common-layout">
+<div class="common-layout" >
 
     <el-container>
       

@@ -1,34 +1,55 @@
 
 <template>
-    <div class = "login_container">
+    <div class = "login_container"  v-loading="false">
         <div class = "login_box">
             <div class="avatar_box">
                 <img src="./img/Avatar_login.webp" alt="" class="src">
             </div>
-            <el-form label-width = "0px" class = "login_form">
-                <el-form-item >
-                    <el-input  placeholder="Please input username" :prefix-icon = "User">
-
+            <el-form label-width = "0px"  ref = "formRef"  :rules="FormRules" class = "login_form" >
+                <el-form-item prop="username"   >
+                    
+                    <el-input v-model="LoginForm.username"   placeholder="Please input username" :prefix-icon = "User" >
                     </el-input>
                 </el-form-item>
 
-                <el-form-item >
-                    <el-input   placeholder="Please input password" :prefix-icon = "Lock" />
+                <el-form-item prop="password" >
+                    <el-input  v-model="LoginForm.password"     placeholder="Please input password" :prefix-icon = "Lock" type = "password" show-password/>
                 </el-form-item>
-                   <el-button type="primary" style = "width:100%;margin-bottom: 30px;">登录</el-button>
+                   <el-button type="primary" style = "width:100%;margin-bottom: 30px;" @click = "Submit()">登录</el-button>
 
             </el-form>
-
-
         </div>
     </div>
 </template>
 <script setup lang="ts">
-    import { ref } from 'vue'
     import { User, Lock } from '@element-plus/icons-vue'
+    import { reactive, ref } from 'vue'
+    const LoginForm = reactive({
+        isLoging:false,
+        username: '',
+        password: '',
+    })
+    let FormRules = {
+        username:[{required:true,message:"用户名不能为空",trigger:"blur"},{min:3,max:20,message:"用户名字符长度在3-20之间",trigger:blur}],
+        password:[{required:true,message:"密码不能为空",trigger:"blur"},{min:3,max:20,message:"密码字符长度在3-20之间",trigger:blur}],
+    }
+    const formRef = ref(null);
 
-    </script>
+    const Submit= ()=>{
+        formRef.value.validate((valid) => {
+        if (!valid) {
+            return false;
+        }
+        else{
+            console.log("114514");
+        }
+    })
+        
+    }
+</script>
+
 <style lang = "less" scoped>
+    
 .login_container {
     background : url(./img/login_background.jpg);
     height:100%;

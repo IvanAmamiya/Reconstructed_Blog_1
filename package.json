@@ -9,8 +9,11 @@
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "@element-plus/icons-vue": "^2.0.9",
+    "@vuelidate/core": "^2.0.0-alpha.44",
+    "@vuelidate/validators": "^2.0.0-alpha.31",
     "@vueuse/core": "^9.1.1",
     "ant-design-vue": "^3.2.11",
+    "crypto": "^1.0.1",
     "element-plus": "^2.2.15",
     "eslint": "^8.23.0",
     "less": "^4.1.3",
