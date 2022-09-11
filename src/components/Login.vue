@@ -5,7 +5,7 @@
             <div class="avatar_box">
                 <img src="./img/Avatar_login.webp" alt="" class="src">
             </div>
-            <el-form label-width = "0px"  ref = "formRef"  :rules="FormRules" class = "login_form" >
+            <el-form label-width = "0px"  ref = "formRef" :model="LoginForm" :rules="FormRules" class = "login_form" >
                 <el-form-item prop="username"   >
                     
                     <el-input v-model="LoginForm.username"   placeholder="Please input username" :prefix-icon = "User" >
@@ -33,7 +33,7 @@
         username:[{required:true,message:"用户名不能为空",trigger:"blur"},{min:3,max:20,message:"用户名字符长度在3-20之间",trigger:blur}],
         password:[{required:true,message:"密码不能为空",trigger:"blur"},{min:3,max:20,message:"密码字符长度在3-20之间",trigger:blur}],
     }
-    const formRef = ref(null);
+    const formRef = ref();
 
     const Submit= ()=>{
         formRef.value.validate((valid) => {
