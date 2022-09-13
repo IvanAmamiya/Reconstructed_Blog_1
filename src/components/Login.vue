@@ -22,10 +22,12 @@
     </div>
 </template>
 <script setup lang="ts">
+    import {ElNotification} from "element-plus"
     import { User, Lock } from '@element-plus/icons-vue'
     import { reactive, ref } from 'vue'
+    import {  login  } from "../api/manager"
+
     const LoginForm = reactive({
-        isLoging:false,
         username: '',
         password: '',
     })
@@ -36,13 +38,28 @@
     const formRef = ref();
 
     const Submit= ()=>{
+
         formRef.value.validate((valid) => {
         if (!valid) {
             return false;
         }
-        else{
-            console.log("114514");
-        }
+        login(LoginForm.username,LoginForm.password)
+        .then(res=>{
+            console.log(114514)
+            ElNotification({
+                message:"登陆成功",
+                type: 'success', 
+  })
+        })
+        .catch(err=>{
+            console.log(err.response.data.msg)
+            ElNotification({
+                message: err.response.data.msg||"请求失败",
+                type: 'error', 
+  })
+  
+
+        })
     })
         
     }
