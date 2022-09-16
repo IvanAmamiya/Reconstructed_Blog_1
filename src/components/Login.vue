@@ -26,6 +26,12 @@
     import { User, Lock } from '@element-plus/icons-vue'
     import { reactive, ref } from 'vue'
     import {  login  } from "../api/manager"
+    import {useRouter} from 'vue-router'
+    import {useCookies} from '@vueuse/integrations/useCookies'
+    const router = useRouter()
+    const cookie = useCookies()
+
+
 
     const LoginForm = reactive({
         username: '',
@@ -36,6 +42,7 @@
         password:[{required:true,message:"密码不能为空",trigger:"blur"},{min:3,max:20,message:"密码字符长度在3-20之间",trigger:blur}],
     }
     const formRef = ref();
+    
 
     const Submit= ()=>{
 
@@ -45,17 +52,24 @@
         }
         login(LoginForm.username,LoginForm.password)
         .then(res=>{
-            console.log(114514)
             ElNotification({
                 message:"登陆成功",
                 type: 'success', 
-  })
+                duration:3000,
+
+  }),
+  router.push('/'),
+  console.log(res.data.data["token"]),
+  cookie.set("admin-token",res.data.data["token"])
+
+
         })
         .catch(err=>{
             console.log(err.response.data.msg)
             ElNotification({
                 message: err.response.data.msg||"请求失败",
                 type: 'error', 
+                duration:3000
   })
   
 
@@ -64,6 +78,7 @@
         
     }
 </script>
+
 
 <style lang = "less" scoped>
     

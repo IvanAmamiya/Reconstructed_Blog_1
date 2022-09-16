@@ -61,8 +61,12 @@ html,body{
         )
       },
 
+
     }
   }
-
+  ElNotification({
+    message:"欢迎光临！",
+    duration:3000
+  })
 </script>
 
