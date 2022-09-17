@@ -22,15 +22,16 @@
     </div>
 </template>
 <script setup lang="ts">
-    import {ElNotification} from "element-plus"
     import { User, Lock } from '@element-plus/icons-vue'
-    import { reactive, ref } from 'vue'
-    import {  login,getinfo  } from "../api/manager"
+    import { reactive, ref ,onMounted, onBeforeUnmount} from 'vue'
     import {useRouter} from 'vue-router'
-    import {useCookies} from '@vueuse/integrations/useCookies'
+    import {useStore} from 'vuex'
+import { login } from '../api/manager'
     import { setToken } from "../composables/auth"
+    import {toast} from "../composables/util"
     const router = useRouter()
     const loading = ref(false)
+    const store = useStore()
 
 
     const LoginForm = reactive({
@@ -51,37 +52,33 @@
             return false;
         }
         loading.value = true;
-        login(LoginForm.username,LoginForm.password)
-        .then(res=>{
-            ElNotification({
-                message:"登陆成功",
-                type: 'success', 
-                duration:3000,
-
-  })
-
-
-  router.push('/'),
-  setToken(res["token"]),
-  console.log(res),
-  //cookie.set("admin-token",res["token"])
-  getinfo().then((res2)=>{
-    console.log(res2);
-  }).finally(
-    ()=>{loading.value = false;}
-  )
-
-
-
-        })
-        .catch(err=>{
+        store.dispatch("login",LoginForm).then((res)=>{
+            toast("登陆成功"),
+            router.push("/")
+        }
+        ).finally(()=>{
             loading.value = false;
         })
-
 
     })
         
     }
+    function onKeyUp(e){
+        if(e.key=="Enter")
+        {
+            Submit()
+        }
+    }
+    onMounted(()=>{
+        document.addEventListener("keyup",onKeyUp)
+
+    })
+    onBeforeUnmount(()=>{
+        document.removeEventListener("keyup",onKeyUp)
+
+    })
+    
+
 </script>
 
 

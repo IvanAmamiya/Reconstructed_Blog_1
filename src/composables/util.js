@@ -1,6 +1,6 @@
 import {ElNotification} from "element-plus"
 
-export function toast(message,type,dangerouslyUseHTMLString = false)
+export function toast(message,type = "success",dangerouslyUseHTMLString = false)
 {
     ElNotification({
         message,
