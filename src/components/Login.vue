@@ -15,7 +15,7 @@
                 <el-form-item prop="password" >
                     <el-input  v-model="LoginForm.password"     placeholder="Please input password" :prefix-icon = "Lock" type = "password" show-password/>
                 </el-form-item>
-                   <el-button type="primary" style = "width:100%;margin-bottom: 30px;" @click = "Submit()">登录</el-button>
+                   <el-button type="primary" style = "width:100%;margin-bottom: 30px;" @click = "Submit()" v-loading = "loading">登录</el-button>
 
             </el-form>
         </div>
@@ -25,12 +25,12 @@
     import {ElNotification} from "element-plus"
     import { User, Lock } from '@element-plus/icons-vue'
     import { reactive, ref } from 'vue'
-    import {  login  } from "../api/manager"
+    import {  login,getinfo  } from "../api/manager"
     import {useRouter} from 'vue-router'
     import {useCookies} from '@vueuse/integrations/useCookies'
+    import { setToken } from "../composables/auth"
     const router = useRouter()
-    const cookie = useCookies()
-
+    const loading = ref(false)
 
 
     const LoginForm = reactive({
@@ -50,6 +50,7 @@
         if (!valid) {
             return false;
         }
+        loading.value = true;
         login(LoginForm.username,LoginForm.password)
         .then(res=>{
             ElNotification({
@@ -57,23 +58,27 @@
                 type: 'success', 
                 duration:3000,
 
-  }),
+  })
+
+
   router.push('/'),
-  console.log(res.data.data["token"]),
-  cookie.set("admin-token",res.data.data["token"])
+  setToken(res["token"]),
+  console.log(res),
+  //cookie.set("admin-token",res["token"])
+  getinfo().then((res2)=>{
+    console.log(res2);
+  }).finally(
+    ()=>{loading.value = false;}
+  )
+
 
 
         })
         .catch(err=>{
-            console.log(err.response.data.msg)
-            ElNotification({
-                message: err.response.data.msg||"请求失败",
-                type: 'error', 
-                duration:3000
-  })
-  
-
+            loading.value = false;
         })
+
+
     })
         
     }
