@@ -1,4 +1,5 @@
-import {ElNotification} from "element-plus"
+
+
 
 export function toast(message,type = "success",dangerouslyUseHTMLString = false)
 {
@@ -8,4 +9,18 @@ export function toast(message,type = "success",dangerouslyUseHTMLString = false)
         duration:3000,    
         dangerouslyUseHTMLString,
     })
+
+      
 }
+export function Teiji (Content = "提示内容",title = "" , type = "warning")  {
+    return ElMessageBox.confirm(
+        Content,
+        title,
+        {
+          confirmButtonText: '是',
+          cancelButtonText: '否',
+          type
+        }
+      )
+    
+  }

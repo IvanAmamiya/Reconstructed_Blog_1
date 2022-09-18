@@ -48,6 +48,8 @@ html,body{
 </style>
 
 <script>
+import { toast } from './composables/util';
+
   export default{
     name:'app',
     methods:
@@ -64,9 +66,6 @@ html,body{
 
     }
   }
-  ElNotification({
-    message:"欢迎光临！",
-    duration:3000
-  })
+toast("欢迎光临","info")
 </script>
 
