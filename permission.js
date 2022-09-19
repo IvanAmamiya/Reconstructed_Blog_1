@@ -1,10 +1,13 @@
 import router from "./src/router/index"
 import {getToken} from "./src/composables/auth"
-import {toast} from "./src/composables/util"
+import {hideFullLoading, showFullLoading, toast} from "./src/composables/util"
 import store from "./src/store"
 
 router.beforeEach((async (to,from,next)=>{
+    showFullLoading()
     const token = getToken()
+    let title = (to.meta.title?to.meta.title:"")+"-Rokkosovskaya的个人Blog";
+    document.title = title;
     if(!token&&to.path=="/about")
     {
         toast("请先登录","error");
@@ -21,3 +24,6 @@ router.beforeEach((async (to,from,next)=>{
     }
     next()
 }))
+router.afterEach((to,from,next)=>{
+    hideFullLoading()
+})

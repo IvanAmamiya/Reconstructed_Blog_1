@@ -16,6 +16,7 @@ app.use(router)
 
 //app.use(ElementPlus)
 import "../permission"
+import 'nprogress/nprogress.css'
 
 app.use(store)
 

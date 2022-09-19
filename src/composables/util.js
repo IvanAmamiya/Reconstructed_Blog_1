@@ -1,4 +1,4 @@
-
+import nprogress from 'nprogress'
 
 
 export function toast(message,type = "success",dangerouslyUseHTMLString = false)
@@ -23,4 +23,11 @@ export function Teiji (Content = "提示内容",title = "" , type = "warning")  
         }
       )
     
+  }
+
+  export function showFullLoading(){
+    nprogress.start()
+  }
+  export function hideFullLoading(){
+    nprogress.done()
   }

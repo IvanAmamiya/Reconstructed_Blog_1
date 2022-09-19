@@ -29,6 +29,7 @@ const router = useRouter()
 const store = useStore()
   function LogOutHandle()
   {
+    
     Teiji("确认要退出登录吗","","info")
     .then(res=>{
       logout().finally(()=>{
