@@ -11,7 +11,10 @@ const router = createRouter({
       component: import('../Home.vue'),
       children:[
 
-      ]
+      ],
+      meta :{
+        title : "首页"
+      }
 
       
     },
@@ -19,15 +22,20 @@ const router = createRouter({
       path: '/login',
       name:"login",
       component: Login,
-
+      meta :{
+        title : "登录"
+      }
       
     },
+    
 
     {
       path: '/about',
       name:"about",
       component: About,
-
+      meta :{
+        title : "关于"
+      }
       
     },
    
