@@ -21,24 +21,5 @@
 
 </style>
 <script setup>
-import {Teiji, toast} from "./composables/util.js"
-import { logout } from "./api/manager";
-import {useRouter} from "vue-router";
-import {useStore} from "vuex"
-const router = useRouter()
-const store = useStore()
-  function LogOutHandle()
-  {
-    
-    Teiji("确认要退出登录吗","","info")
-    .then(res=>{
-      logout().finally(()=>{
-        store.dispatch("logout")
-        router.push("/login")
-        toast("退出登录成功！")
-      })
-
-    })
-
-  }
+import { LogOutHandle }from "./composables/opts"
 </script>

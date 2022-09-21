@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../components/Login.vue'
 import About from '../components/About.vue'
+import Article from '../components/Article.vue'
+import QuestionBox from '../components/QuestionBox.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,7 +41,24 @@ const router = createRouter({
       }
       
     },
-   
+    {
+      path: '/Article',
+      name:"article",
+      component: Article,
+      meta :{
+        title : "文章"
+      }
+      
+    },
+    {
+      path: '/QuestionBox',
+      name:"questionbox",
+      component: QuestionBox,
+      meta :{
+        title : "问题箱"
+      }
+      
+    },
 
   ]
 })

@@ -15,17 +15,18 @@
   >
     <h3>Rokossovskaya的个人Blog</h3>
     <el-menu-item index="2"  @click = "ClickMenu('home')" >首页</el-menu-item>
-    <el-menu-item index="2" >文章</el-menu-item>
-    <el-menu-item index="3">提问箱</el-menu-item>
-    <el-menu-item index="4" @click = "ClickMenu('about')">关于</el-menu-item>
+    <el-menu-item index="3"  @click = "ClickMenu('article')"  >文章</el-menu-item>
+    <el-menu-item index="4"   @click = "ClickMenu('questionbox')" >提问箱</el-menu-item>
+    <el-menu-item index="5" @click = "ClickMenu('about')">测试模块</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="5" @click = "ClickMenu('login')" >登录</el-menu-item>
-    <el-menu-item v-if = "false" @click = "ClickMenu('login')">登出</el-menu-item>
+    <el-menu-item v-if = "!tokenss()" index="6" @click = "ClickMenu('login')" >登录</el-menu-item>
+    <el-menu-item v-if = "tokenss()" index="7">{{$store.state.user.username}}</el-menu-item>
+    <el-menu-item v-if = "tokenss()" @click = "LogOutHandle1" index="8">登出</el-menu-item>
 
 
 
 
-  </el-menu>
+  </el-menu>  
   <RouterView/> 
    </el>
 
@@ -54,14 +55,14 @@ html,body{
 <script>
 import { toast } from './composables/util';
 import { getToken } from './composables/auth';
-import { ref } from 'vue'
+import {LogOutHandle} from "./composables/opts"
 
 
   export default{
     name:'app',
     methods:
     {
-      ClickMenu(item)
+      ClickMenu(item) 
       {
         this.$router.push(
           {
@@ -69,11 +70,20 @@ import { ref } from 'vue'
           }
         )
       },
+      tokenss() 
+      {
+        return getToken()?true:false
+      },
+      LogOutHandle1()
+      {
+        return LogOutHandle()
+      }
 
 
     }
     
   }
+
 toast("欢迎光临","info")
 
 
