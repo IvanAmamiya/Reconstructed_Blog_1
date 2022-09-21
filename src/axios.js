@@ -1,6 +1,9 @@
 import axios from "axios"
 import {toast} from "./composables/util"
 import {useCookies} from '@vueuse/integrations/useCookies'
+import store from "./store";
+import router from "./src/router/index"
+
 
 
 
@@ -27,7 +30,12 @@ service.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     return response.data.data;
   }, function (error) {
-    toast(error.response.data.msg||"请求失败","error")
+    const msg = error.response.data.msg||"请求失败"
+    if (msg == "非法token，请先登录！")
+    {
+      store.dispatch("logout").finally(()=>location.reload())
+    }
+    toast(msg,"error")
 
     // 对响应错误做点什么
 

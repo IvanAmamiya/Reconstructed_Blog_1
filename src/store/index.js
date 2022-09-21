@@ -2,6 +2,7 @@ import {createStore} from "vuex"
 import {  getinfo, login,logout  } from "../api/manager"
 import { setToken ,removeToken} from "../composables/auth"
 
+
 const store = createStore({
     state () {
         return {
@@ -41,10 +42,12 @@ const store = createStore({
         },
 
         logout({commit}){
-
                     removeToken()
                     commit("SET_USER_INFO",{})
+
+            
             }
+
 
         }
     }
