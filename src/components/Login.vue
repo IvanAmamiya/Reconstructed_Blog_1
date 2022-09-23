@@ -26,8 +26,6 @@
     import { reactive, ref ,onMounted, onBeforeUnmount} from 'vue'
     import {useRouter} from 'vue-router'
     import {useStore} from 'vuex'
-import { login } from '../api/manager'
-    import { setToken } from "../composables/auth"
     import {toast} from "../composables/util"
     const router = useRouter()
     const loading = ref(false)

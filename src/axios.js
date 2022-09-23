@@ -1,8 +1,7 @@
 import axios from "axios"
 import {toast} from "./composables/util"
 import {useCookies} from '@vueuse/integrations/useCookies'
-import store from "./store";
-import router from "./src/router/index"
+import store from "./store/";
 
 
 
