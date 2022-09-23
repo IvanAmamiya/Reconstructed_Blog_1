@@ -5,6 +5,8 @@ import store from './store'
 import './assets/css/global.css'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+import { tinymce } from 'tinymce';
+
 
 
 //import ElementPlus from 'element-plus'
@@ -14,6 +16,7 @@ import 'ant-design-vue/dist/antd.css'
 const app = createApp(App)
 app.use(Antd)
 app.use(router)
+app.use(tinymce)
 
 //app.use(ElementPlus)
 import "../permission"

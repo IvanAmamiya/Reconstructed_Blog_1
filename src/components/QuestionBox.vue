@@ -17,8 +17,9 @@
                             placeholder="Please input" />
                         </el-form-item>
                         <div style="margin: 10px 0" />
-
-                        <el-button>提交</el-button>
+                        <el-row type="flex" justify="end">
+                        <el-button type = "primary" style = "margin-right:10px">提交</el-button>
+                        </el-row>
                     </el-form>
                 </el-col>
             </el-row>
