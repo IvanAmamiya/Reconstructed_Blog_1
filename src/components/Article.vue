@@ -4,10 +4,11 @@
 
     <div class="ArticleContainer">
         <h1>文章模块</h1>
+        <strong>114514</strong>
         <el-button type="primary" size="large" round @click="EditTrigger">发文</el-button>
 
-        <el-card class="EditorContainer">
-            <el-form v-if="isEditing">
+        <el-card v-if="isEditing" class="EditorContainer">
+            <el-form :model = ContentForm>
                 <el-row type="flex" justify="end" @click="cancelEdit">
 
                     <el-icon size="large">
@@ -19,13 +20,13 @@
                 </el-row>
 
                 <el-form-item>
-                    <el-input placeholder="文章标题"></el-input>
+                    <el-input placeholder="文章标题"  v-model:modelValue="ContentForm.titleContent"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <Editor ref="editorRef" id="editor" v-model:modelValue="content"></Editor>
+                <el-form-item >
+                    <Editor ref="editorRef" id="editor" v-model:modelValue="ContentForm.Content" style="width:100%"></Editor>
                 </el-form-item>
                 <el-row type="flex" justify="end">
-                    <el-button type="primary">发表</el-button>
+                    <el-button type="primary" @click="LOG" style = "width:100%">发表</el-button>
 
                 </el-row>
             </el-form>
@@ -40,14 +41,18 @@
 import { Close } from '@element-plus/icons-vue'
 
 import { getToken } from '../composables/auth';
-import { ref } from "vue"
+import { ref ,reactive} from "vue"
 import { toast } from '../composables/util';
 import router from "../router/index"
 
 
 const isEditing = ref(false)
-const content = "文章内容"
 const token = getToken()
+const ContentForm = reactive({
+    titleContent:"",
+    Content:""
+
+})
 const EditTrigger = () => {
     if(!token)
     {
@@ -62,7 +67,9 @@ const EditTrigger = () => {
 const cancelEdit = () => {
     isEditing.value = false
 }
-
+const LOG = ()=>{
+    console.log(ContentForm.Content)
+}
 
 
 </script>
@@ -71,6 +78,7 @@ const cancelEdit = () => {
     background-color: beige;
     border-radius: 3px;
     position: absolute;
+    width:100%;
     left: 50%;
     top: 60%;
     transform: translate(-50%, -50%);

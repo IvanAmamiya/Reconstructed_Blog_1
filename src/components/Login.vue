@@ -56,6 +56,8 @@
         }
         ).finally(()=>{
             loading.value = false;
+            location.reload()
+
         })
 
     })
