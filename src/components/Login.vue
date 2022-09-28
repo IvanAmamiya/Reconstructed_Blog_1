@@ -52,11 +52,11 @@
         loading.value = true;
         store.dispatch("login",LoginForm).then((res)=>{
             toast("登陆成功"),
+            console.log(res),
             router.push("/")
         }
         ).finally(()=>{
             loading.value = false;
-            location.reload()
 
         })
 

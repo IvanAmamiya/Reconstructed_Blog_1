@@ -20,7 +20,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
-  server:{
+ server:{
     proxy:{
       '/api': {
         target: "http://ceshi13.dishait.cn/",
@@ -29,7 +29,7 @@ export default defineConfig({
 
 
     },
-  }
+  } 
 },
   resolve: {
     alias: {

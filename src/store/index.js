@@ -4,7 +4,9 @@ import { setToken ,removeToken} from "../composables/auth"
 
 
 const store = createStore({
+    
     state () {
+
         return {
             user:{}
         }
@@ -13,11 +15,11 @@ const store = createStore({
     mutations: {
         SET_USER_INFO(state,user){
             state.user = user
-
         }
     },
     actions:{
         login({commit},{username,password}){
+
             return new Promise((resolve,reject)=>{
                 login(username,password).then((res)=>{
                     setToken(res["token"])
@@ -29,6 +31,7 @@ const store = createStore({
             })
         },
         getinfo({commit}){
+
             return new Promise((resolve,reject)=>{
                 getinfo().then((res)=>{
                     commit("SET_USER_INFO",res)

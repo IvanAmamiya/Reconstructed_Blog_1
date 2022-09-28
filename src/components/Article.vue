@@ -3,9 +3,10 @@
     <RouterView />
 
     <div class="ArticleContainer">
+        <el-card>
         <h1>文章模块</h1>
-        <strong>114514</strong>
         <el-button type="primary" size="large" round @click="EditTrigger">发文</el-button>
+    </el-card>
 
         <el-card v-if="isEditing" class="EditorContainer">
             <el-form :model = ContentForm>
@@ -31,6 +32,7 @@
                 </el-row>
             </el-form>
         </el-card>
+        <div v-for="key in $store.state.user.Article.list"><el-card><p v-html = "key.title"></p><p>{{key.content}}</p></el-card></div>
     </div>
 
 

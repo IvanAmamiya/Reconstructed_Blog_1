@@ -53,7 +53,6 @@ html,body{
 </style>
 
 <script>
-import { toast } from './composables/util';
 import { getToken } from './composables/auth';
 import {LogOutHandle} from "./composables/opts"
 
@@ -84,7 +83,6 @@ import {LogOutHandle} from "./composables/opts"
     
   }
 
-toast("欢迎光临","info")
 
 
 
