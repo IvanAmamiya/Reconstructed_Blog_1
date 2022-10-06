@@ -3,6 +3,7 @@ import Login from '../components/Login.vue'
 import About from '../components/About.vue'
 import Article from '../components/Article.vue'
 import QuestionBox from '../components/QuestionBox.vue'
+import detail from '../components/detail.vue'
 
 
 const router = createRouter({
@@ -56,6 +57,15 @@ const router = createRouter({
       component: QuestionBox,
       meta :{
         title : "问题箱"
+      }
+      
+    },
+    {
+      path: '/detail/:id',
+      name:"detail",
+      component: detail,
+      meta :{
+        title : "细节模块"
       }
       
     },

@@ -1,5 +1,5 @@
 import {createStore} from "vuex"
-import {  getinfo, login,logout  } from "../api/manager"
+import {  getinfo,getArticle ,login,getQuestion  } from "../api/manager"
 import { setToken ,removeToken} from "../composables/auth"
 
 
@@ -8,13 +8,22 @@ const store = createStore({
     state () {
 
         return {
-            user:{}
+            user:{},
+            Article:{},
+            Question:{}
+
         }
 
     },
     mutations: {
         SET_USER_INFO(state,user){
             state.user = user
+        },
+        SET_ARTICLE_INFO(state,article){
+            state.Article = article
+        },
+        SET_Question_INFO(state,question){
+            state.Question = question
         }
     },
     actions:{
@@ -43,7 +52,32 @@ const store = createStore({
             })
 
         },
+        getArticle({commit})
+        {
+            return new Promise((resolve,reject)=>{
+                getArticle().then((res)=>{
+                    commit("SET_ARTICLE_INFO",res)
+                    resolve(res)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
+            })
 
+        },
+        getQuestion({commit})
+        {
+            return new Promise((resolve,reject)=>{
+                getQuestion().then((res)=>{
+                    commit("SET_Question_INFO",res)
+                    resolve(res)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
+            })
+
+        },
         logout({commit}){
                     removeToken()
                     commit("SET_USER_INFO",{})

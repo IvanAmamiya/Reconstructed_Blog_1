@@ -4,6 +4,9 @@ import {hideFullLoading, showFullLoading, toast} from "./src/composables/util"
 import store from "./src/store"
 
 router.beforeEach((async (to,from,next)=>{
+    store.dispatch("getArticle")
+    store.dispatch("getQuestion")
+
     showFullLoading()
     const token = getToken()
     let title = (to.meta.title?to.meta.title:"")+"-Rokkosovskaya的个人Blog";

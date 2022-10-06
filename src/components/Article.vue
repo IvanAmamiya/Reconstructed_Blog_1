@@ -32,7 +32,8 @@
                 </el-row>
             </el-form>
         </el-card>
-        <div v-for="key in $store.state.user.Article.list"><el-card><p v-html = "key.title"></p><p>{{key.content}}</p></el-card></div>
+        <el-card v-show = "!isEditing"   v-for="key in store.state.Article.Article.list"><a v-html = "key.title" @click = "router.push('/detail/'+key.id)"></a><p>{{key.content}}</p></el-card>
+
     </div>
 
 
@@ -41,11 +42,12 @@
 </template>    
 <script setup lang="ts">
 import { Close } from '@element-plus/icons-vue'
-
 import { getToken } from '../composables/auth';
 import { ref ,reactive} from "vue"
 import { toast } from '../composables/util';
 import router from "../router/index"
+import store  from '../store'
+
 
 
 const isEditing = ref(false)
