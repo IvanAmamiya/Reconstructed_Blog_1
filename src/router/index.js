@@ -64,6 +64,7 @@ const router = createRouter({
       path: '/detail/:id',
       name:"detail",
       component: detail,
+      props:true,
       meta :{
         title : "细节模块"
       }
@@ -74,3 +75,4 @@ const router = createRouter({
 })
 
 export default router
+

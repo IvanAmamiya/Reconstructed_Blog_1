@@ -1,5 +1,5 @@
 import {createStore} from "vuex"
-import {  getinfo,getArticle ,login,getQuestion  } from "../api/manager"
+import {  getinfo,getArticle ,login,getQuestion,getArticleDetail  } from "../api/manager"
 import { setToken ,removeToken} from "../composables/auth"
 
 
@@ -10,6 +10,7 @@ const store = createStore({
         return {
             user:{},
             Article:{},
+            ArticleDetail:{},
             Question:{}
 
         }
@@ -22,6 +23,10 @@ const store = createStore({
         SET_ARTICLE_INFO(state,article){
             state.Article = article
         },
+        SET_ARTICLEDETAIL_INFO(state,article){
+            state.ArticleDetail = article
+        },
+
         SET_Question_INFO(state,question){
             state.Question = question
         }
@@ -57,6 +62,19 @@ const store = createStore({
             return new Promise((resolve,reject)=>{
                 getArticle().then((res)=>{
                     commit("SET_ARTICLE_INFO",res)
+                    resolve(res)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
+            })
+
+        },
+        getArticleDetail({commit})
+        {
+            return new Promise((resolve,reject)=>{
+                getArticleDetail().then((res)=>{
+                    commit("SET_ARTICLEDETAIL_INFO",res)
                     resolve(res)
                 })
                 .catch((err)=>{

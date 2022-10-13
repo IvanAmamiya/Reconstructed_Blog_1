@@ -2,9 +2,9 @@ import router from "./src/router/index"
 import {getToken} from "./src/composables/auth"
 import {hideFullLoading, showFullLoading, toast} from "./src/composables/util"
 import store from "./src/store"
-
 router.beforeEach((async (to,from,next)=>{
     store.dispatch("getArticle")
+
     store.dispatch("getQuestion")
 
     showFullLoading()
@@ -24,6 +24,11 @@ router.beforeEach((async (to,from,next)=>{
     if(token)
     {
         await store.dispatch("getinfo")
+        
+    }
+    if(to.name=="detail")
+    {
+        await store.dispatch("getArticleDetail")
     }
     next()
 }))

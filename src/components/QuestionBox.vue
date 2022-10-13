@@ -20,7 +20,7 @@
 
 
                     <el-form-item>
-                        <el-input v-model="textarea1" autosize type="textarea" background-color:blue
+                        <el-input v-model="textarea1"  background-color:blue
                             placeholder="Please input" />
                     </el-form-item>
                     <div style="margin: 10px 0" />
@@ -49,6 +49,8 @@
 import { ref } from 'vue'
 import store  from '../store'
 import {Close} from '@element-plus/icons-vue'
+import axios from '../axios'
+import { reject } from 'lodash'
 const textarea1 = ref('')
 const textarea2 = ref('')
 const isQuestionBox = ref(false)
@@ -59,6 +61,27 @@ const QuestionBoxTrigger = ()=>{
 const cancelQuestionBox = () => {
     isQuestionBox.value = false
 }
+const Atest = ()=> {
+    return new Promise ( (resolve,reject)=>
+    {
+        
+            axios.post("/admin/getTest")
+            .then((res114)=>{
+                console.log(res114)
+                resolve(res114)
+            }
+        )
+        .catch((err)=>{
+            console.log(err)
+            reject(err)
+        })
+    }
+    )
+
+}
+Atest()
+
+
 
 </script>
 <style lang = "less" >

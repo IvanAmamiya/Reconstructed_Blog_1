@@ -23,3 +23,7 @@ export function logout()
 {
     return axios.post("/admin/logout")
 }
+export function getArticleDetail()
+{
+    return axios.post('admin/getArticleDetail');
+}
