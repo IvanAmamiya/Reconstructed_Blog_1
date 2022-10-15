@@ -30,7 +30,12 @@ router.beforeEach((async (to,from,next)=>{
     {
         await store.dispatch("getArticleDetail")
     }
-    next()
+     if(to.path == "detail/")
+    {
+        console.log(213)
+        await store.dispatch("getQuestion")
+    }
+     next()
 }))
 router.afterEach((to,from,next)=>{
     hideFullLoading()

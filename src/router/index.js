@@ -4,6 +4,8 @@ import About from '../components/About.vue'
 import Article from '../components/Article.vue'
 import QuestionBox from '../components/QuestionBox.vue'
 import detail from '../components/detail.vue'
+import Question from '../components/Question.vue'
+
 
 
 const router = createRouter({
@@ -57,7 +59,15 @@ const router = createRouter({
       component: QuestionBox,
       meta :{
         title : "问题箱"
-      }
+      },
+      children:[
+        {
+          path : "detail/",
+          name : "Question",
+          component : Question,
+          
+        }
+      ]
       
     },
     {

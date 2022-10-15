@@ -11,7 +11,7 @@ const store = createStore({
             user:{},
             Article:{},
             ArticleDetail:{},
-            Question:{}
+            Question:{},
 
         }
 
@@ -29,7 +29,8 @@ const store = createStore({
 
         SET_Question_INFO(state,question){
             state.Question = question
-        }
+            console.log(this)
+        },
     },
     actions:{
         login({commit},{username,password}){
@@ -96,6 +97,7 @@ const store = createStore({
             })
 
         },
+
         logout({commit}){
                     removeToken()
                     commit("SET_USER_INFO",{})

@@ -16,6 +16,7 @@ export function getArticle()
 }
 export function getQuestion()
 {
+    console.log("getQ")
     return axios.post("/admin/getQuestion");
 }
 

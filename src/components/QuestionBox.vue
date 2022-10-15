@@ -3,6 +3,9 @@
     <h1>提问箱模块</h1>
     <el-button type="primary" size="large" round @click="QuestionBoxTrigger">试试发一个提问？</el-button>
 </el-card>
+<RouterView/>
+
+
 
     <el-card class="ArticleForm" v-if="isQuestionBox">
         <el-row>
@@ -13,19 +16,18 @@
 
 
                         <el-icon size="large">
-                            <Close />
+                            <Close style = "color:black"/>
                         </el-icon>
                     </el-row>
+
                     <h1>提问</h1>
-
-
                     <el-form-item>
                         <el-input v-model="textarea1"  background-color:blue
                             placeholder="Please input" />
                     </el-form-item>
                     <div style="margin: 10px 0" />
                     <el-form-item>
-                        <el-input v-model="textarea2" :autosize="{ minRows: 2, maxRows: 4 }" type="textarea"
+                        <el-input  v-model="textarea2" :autosize="{ minRows: 2, maxRows: 4 }" type="textarea"
                             placeholder="Please input" />
                     </el-form-item>
                     <div style="margin: 10px 0" />
@@ -36,9 +38,10 @@
             </el-col>
         </el-row>
     </el-card>
+
     <el-card class = "cardSubSystem"  v-for="key in store.state.Question.Question?.Questionlist" >
-            <p v-html="key.title"></p>
-            <p>{{key.content}}</p>
+            <router-link style = "color:aquamarine"  v-html="key.title" :to = '{path:"/QuestionBox/detail",query:{"id":key.id}}' ></router-link>
+            <p style = "color:blanchedalmond">{{key.content}}</p>
     </el-card>
 
 </div>
@@ -46,7 +49,7 @@
 
 </template>    
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref ,reactive} from 'vue'
 import store  from '../store'
 import {Close} from '@element-plus/icons-vue'
 import axios from '../axios'
@@ -61,6 +64,8 @@ const QuestionBoxTrigger = ()=>{
 const cancelQuestionBox = () => {
     isQuestionBox.value = false
 }
+
+
 const Atest = ()=> {
     return new Promise ( (resolve,reject)=>
     {
@@ -80,7 +85,6 @@ const Atest = ()=> {
 
 }
 Atest()
-
 
 
 </script>
