@@ -60,6 +60,7 @@ const store = createStore({
         },
         getArticle({commit})
         {
+            console.log(1)
             return new Promise((resolve,reject)=>{
                 getArticle().then((res)=>{
                     commit("SET_ARTICLE_INFO",res)
@@ -75,6 +76,7 @@ const store = createStore({
         {
             return new Promise((resolve,reject)=>{
                 getArticleDetail().then((res)=>{
+                    console.log('SET_ARTICLEDETAIL_INFO')
                     commit("SET_ARTICLEDETAIL_INFO",res)
                     resolve(res)
                 })

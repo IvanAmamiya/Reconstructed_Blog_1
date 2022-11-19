@@ -1,11 +1,16 @@
 <script setup>
 import store from '../store'
 import { ref,reactive } from 'vue'
-
-const ArticleDetail = store.state.ArticleDetail.Article.list
-const Reviews = store.state.ArticleDetail.Review.ReviewList
-console.log(store.state.ArticleDetail)
-
+import {useRouter } from 'vue-router'
+const route = useRouter()
+const ArticleDetail = store.state.ArticleDetail.Articles
+console.log(ArticleDetail)
+let num = route.currentRoute.value.params.id
+function findID(array,id){
+    return array.find((res)=>{return res.id==id})
+}
+const Detail = findID(ArticleDetail,num)
+console.log(Detail)
 const ReviewForm = reactive({
     Author:"",
     content:""
@@ -23,13 +28,12 @@ const ReviewSubmit = ()=>{
 
 <template>
     <el-card>
-        <p>正文</p>
-        <h1 style="text-align:center" v-html="ArticleDetail[this.$route.params.id].title"></h1>
-        <p style="font-size:20px;" v-html="store.state.ArticleDetail.Article.list[this.$route.params.id].content"></p>
+        <h1 style="text-align:center">{{Detail.title}}</h1>
+        <p style="font-size:20px;">{{Detail.content}}</p>
 
     </el-card>
     <el-card>
-        <h1>评论({{Reviews.length}})</h1>
+        <h1>评论({{Detail.reviews.length}})</h1>
         <el-form ref = "ReviewRef">
             <el-form-item><el-input v-model="ReviewForm.Author" placeholder="署名"></el-input></el-form-item>
             <el-form-item><el-input type="textarea" :rows="3" v-model="ReviewForm.content" placeholder="内容" ></el-input></el-form-item>
@@ -39,7 +43,9 @@ const ReviewSubmit = ()=>{
         </el-form>
 
     </el-card>
-    <el-card v-for="review in Reviews[this.$route.params.id]">
-        <p>{{review.content}}</p>
+    <el-card v-for="review in Detail.reviews">
+        <p>作者:{{review.Author}}</p>
+        <p>{{review.body}}</p>
+
     </el-card>
 </template>

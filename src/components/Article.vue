@@ -32,7 +32,7 @@
                 </el-row>
             </el-form>
         </el-card>
-        <el-card v-show = "!isEditing"   v-for="key in store.state.Article.Article.list"><a v-html = "key.title" @click = "router.push('/detail/'+key.id)"></a><p>{{key.content}}</p></el-card>
+        <el-card v-show = "!isEditing"   v-for="key in store.state.Article.thisPageArticles"><a v-html = "key.title" @click = "router.push('/detail/'+key.id)"></a><p>{{key.content}}</p></el-card>
 
     </div>
 

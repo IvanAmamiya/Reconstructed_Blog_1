@@ -4,7 +4,6 @@ import {hideFullLoading, showFullLoading, toast} from "./src/composables/util"
 import store from "./src/store"
 router.beforeEach((async (to,from,next)=>{
     store.dispatch("getArticle")
-
     store.dispatch("getQuestion")
 
     showFullLoading()
@@ -33,7 +32,7 @@ router.beforeEach((async (to,from,next)=>{
      if(to.path == "detail/")
     {
         console.log(213)
-        await store.dispatch("getQuestion")
+        await store.dispatch("getArticleDetail")
     }
      next()
 }))
