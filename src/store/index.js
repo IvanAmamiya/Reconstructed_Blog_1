@@ -58,11 +58,10 @@ const store = createStore({
             })
 
         },
-        getArticle({commit})
+        getArticle({commit},{pageNum,pageSize})
         {
-            console.log(1)
             return new Promise((resolve,reject)=>{
-                getArticle().then((res)=>{
+                getArticle(pageNum,pageSize).then((res)=>{
                     commit("SET_ARTICLE_INFO",res)
                     resolve(res)
                 })

@@ -10,9 +10,9 @@ export function getinfo()
 {
     return axios.post("/admin/getinfo");
 }
-export function getArticle()
+export function getArticle(pageNum,pageSize)
 {
-    return axios.post("/admin/getArticle");
+    return axios.get("/admin/getArticle",{params:{pageNum,pageSize}});
 }
 export function getQuestion()
 {

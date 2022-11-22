@@ -14,7 +14,7 @@ function detailForm(id,type,title,content,Author,reviews) {
   this.reviews = reviews;
 }
 const Details = [];
-for(let i = 0;i<10;i++)
+for(let i = 0;i<1000;i++)
 {
   let owntype = 'Article';
   let ownauthor = 'Admin'
@@ -33,12 +33,20 @@ for(let i = 0;i<10;i++)
   Details.push(Detail);
 }
 const Articles = Details.filter((detail)=>{return detail.type==='Article'});
-Mock.mock('/api/admin/getArticle', 'post', ()=>{
-  
-  const thisPageArticles = Articles.slice(0,10);
+Mock.mock(/\/api\/admin\/getArticle/, 'get', (res)=>{
+  let urlStr = res.url.split("?")[1].split("&")
+  let params = {}
+  for(let i = 0;i<urlStr.length;i++)
+  {
+    let arr = urlStr[i].split("=")
+    params[arr[0]]=arr[1]
+  }
+  console.log(params)
+  const thisPageArticles = Articles.slice(params.pageNum,params.pageSize);
   return {
     data: {
       thisPageArticles,
+      totalPages:(Articles.length)/params.pageSize+1
     }
   }
 })

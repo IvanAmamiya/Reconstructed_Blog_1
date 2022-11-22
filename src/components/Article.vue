@@ -32,7 +32,14 @@
                 </el-row>
             </el-form>
         </el-card>
-        <el-card v-show = "!isEditing"   v-for="key in store.state.Article.thisPageArticles"><a v-html = "key.title" @click = "router.push('/detail/'+key.id)"></a><p>{{key.content}}</p></el-card>
+        <el-card v-show = "!isEditing"   v-for="key in store.state.Article.thisPageArticles"><h1><a v-html = "key.title" @click = "router.push('/detail/'+key.id)"></a></h1><p>{{key.content}}</p></el-card>
+        <div class="example-pagination-block">
+            <div class="example-demonstration">When you have more than 7 pages</div>
+            <el-pagination layout="prev, pager, next, total" 
+            :pager-count="11"
+            background
+            :total="store.state.Article.totalPages" />
+        </div>
 
     </div>
 
@@ -47,7 +54,6 @@ import { ref ,reactive} from "vue"
 import { toast } from '../composables/util';
 import router from "../router/index"
 import store  from '../store'
-
 
 
 const isEditing = ref(false)
