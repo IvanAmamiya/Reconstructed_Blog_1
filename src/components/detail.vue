@@ -44,7 +44,7 @@ const ReviewSubmit = ()=>{
 
     </el-card>
     <el-card v-for="review in Detail.reviews">
-        <p>作者:{{review.Author}}</p>
+        <p>作者:{{review.Author}}</p>   
         <p>{{review.body}}</p>
 
     </el-card>

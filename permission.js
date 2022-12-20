@@ -1,9 +1,9 @@
 import router from "./src/router/index"
 import {getToken} from "./src/composables/auth"
-import {hideFullLoading, showFullLoading, toast} from "./src/composables/util"
+import {getUrlParams, hideFullLoading, showFullLoading, toast} from "./src/composables/util"
 import store from "./src/store"
 router.beforeEach((async (to,from,next)=>{
-    store.dispatch("getArticle",{pageNum:0,pageSize:10})
+    
     store.dispatch("getQuestion")
 
     showFullLoading()
@@ -28,6 +28,18 @@ router.beforeEach((async (to,from,next)=>{
     if(to.name=="detail")
     {
         await store.dispatch("getArticleDetail")
+    }
+    if(to.name=="article")
+    {
+        if(to.fullPath.indexOf("?")!==-1)
+        {
+            let Params = getUrlParams(to.fullPath);
+            store.dispatch("getArticle",{pageNum:Params.pageNum,pageSize:10})
+        }
+        else
+        store.dispatch("getArticle",{pageNum:1,pageSize:10})
+
+
     }
      if(to.path == "detail/")
     {

@@ -5,10 +5,7 @@ import store from '../store'
 
 
 export function LogOutHandle()
-  {
-
-
-    
+  {    
     Teiji("确认要退出登录吗","","info")
     .then(()=>{
       logout().finally((e)=>{
@@ -21,7 +18,5 @@ export function LogOutHandle()
       .catch((e)=>{
         console.log(e)
       })
-
     })
-
   }

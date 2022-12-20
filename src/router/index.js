@@ -48,6 +48,7 @@ const router = createRouter({
       path: '/Article',
       name:"article",
       component: Article,
+      props:true,
       meta :{
         title : "文章"
       }

@@ -14,7 +14,7 @@ function detailForm(id,type,title,content,Author,reviews) {
   this.reviews = reviews;
 }
 const Details = [];
-for(let i = 0;i<1000;i++)
+for(let i = 0;i<100000;i++)
 {
   let owntype = 'Article';
   let ownauthor = 'Admin'
@@ -42,7 +42,11 @@ Mock.mock(/\/api\/admin\/getArticle/, 'get', (res)=>{
     params[arr[0]]=arr[1]
   }
   console.log(params)
-  const thisPageArticles = Articles.slice(params.pageNum,params.pageSize);
+  if(params.pageNum==0) params.pageNum=1;
+  const pageStart = (params.pageNum-1)*params.pageSize;
+  const pageEnd = Number(pageStart)+Number(params.pageSize);
+  console.log(pageEnd)
+  const thisPageArticles = Articles.slice(pageStart,pageEnd);
   return {
     data: {
       thisPageArticles,
